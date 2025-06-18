@@ -1,0 +1,13 @@
+[NetDev]
+Name=wg0
+Kind=wireguard
+
+[WireGuard]
+PrivateKeyFile=/etc/systemd/network/wg0.key
+ListenPort=51820
+
+[WireGuardPeer]
+PublicKey=Ft77GdOsEJqFWweyOA0+1vVREFi01qfeTTNPD+RZfWk=
+AllowedIPs=::/1, 8000::/1
+Endpoint=118.91.187.67:47588
+PersistentKeepalive=30

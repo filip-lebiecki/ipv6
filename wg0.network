@@ -1,0 +1,11 @@
+[Match]
+Name=wg0
+
+[Network]
+Address=2a11:6c7:f04:c4::2/64
+BindCarrier=eth0
+IPForward=yes
+
+[Route]
+Destination=::/0
+Gateway=2a11:6c7:f04:c4::1
