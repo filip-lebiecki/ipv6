@@ -1,4 +1,4 @@
-# IPv6
+# IPv6 only network [Youtube video](https://youtu.be/F2t9qBfSY08?si=y-ti4BcSWdU4mIF3)
 
 # Router external interface configuration
 
