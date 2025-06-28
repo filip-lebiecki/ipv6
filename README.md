@@ -1,4 +1,5 @@
 # IPv6 only network [Youtube video](https://youtu.be/F2t9qBfSY08?si=y-ti4BcSWdU4mIF3)
+# IPv6 only network part 2 [Youtube video](https://youtu.be/XrBuoTAhEbE?si=R9AGQNxfoaNQ3vOB)
 
 # Router external interface configuration
 
@@ -130,4 +131,59 @@ ip -br a s dev eth1 (client)
 mtr 2a11:6c7:1200:c2ff:215:5dff:fe0a:2ca8 (from external IPv6 host to client)
 ping amazon.com (client)
 host amazon.com (client)
+```
+
+# Public DNS64/NAT64 Gateway
+
+On client:
+
+```bash
+host ovh.com
+http ovh.com
+vi /etc/systemd/network/eth1.network
+UseDNS=no
+DNS=2a01:4f9:c010:3f02::1
+
+systemctl restart systemd-networkd
+resolvectl status
+host ovh.com
+http ovh.com
+```
+
+# Self-Hosted NAT64 (Tayga) with External DNS64 (Google Public DNS64)
+
+```bash
+apt install tayga
+vi /etc/tayga.conf` 
+ipv6-addr 2001:db8:1::2
+prefix 64:ff9b::/96
+
+systemctl restart tayga
+vi /etc/radvd.conf
+RDNSS 2001:4860:4860::6464
+
+systemctl restart radvd
+vi /etc/systemd/network/eth1.network
+removing custom DNS
+
+systemctl restart systemd-networkd
+host ovh.com
+ping ovh.com
+```
+
+# Fully Self-Hosted DNS64 (Unbound) & NAT64 (Tayga)
+
+```bash
+apt install unbound
+cp server.conf /etc/unbound/unbound.conf.d/
+cat server.conf
+systemctl restart unbound
+ip -6 -br a
+vi /etc/radvd.conf` 
+RDNSS 2a11:6c7:1100:caff::1
+
+systemctl restart radvd
+resolvectl status
+host ovh.com
+ping ovh.com
 ```
