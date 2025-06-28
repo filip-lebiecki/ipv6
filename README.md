@@ -135,7 +135,7 @@ host amazon.com (client)
 
 # Public DNS64/NAT64 Gateway
 
-On client:
+On client
 
 ```bash
 host ovh.com
@@ -151,6 +151,8 @@ http ovh.com
 ```
 
 # Self-Hosted NAT64 (Tayga) with External DNS64 (Google Public DNS64)
+
+On server
 
 ```bash
 apt install tayga
@@ -173,13 +175,15 @@ ping ovh.com
 
 # Fully Self-Hosted DNS64 (Unbound) & NAT64 (Tayga)
 
+On server
+
 ```bash
 apt install unbound
 cp server.conf /etc/unbound/unbound.conf.d/
 cat server.conf
 systemctl restart unbound
 ip -6 -br a
-vi /etc/radvd.conf` 
+vi /etc/radvd.conf
 RDNSS 2a11:6c7:1100:caff::1
 
 systemctl restart radvd
